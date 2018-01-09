@@ -1,0 +1,80 @@
+<div ng-controller="ReviewsIndex as r">
+	<h1 class="ui header" align="center">List of reviews</h1>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Stars</th>
+		<th>Rating</th>
+		<th>Books</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="review in r.reviewDetails">
+	<tr ng-if="review.rating >  0">
+		<td><b>{{review.rating}} stars</b></td>
+		<td><span uib-rating ng-model="review.rating" max="5" read-only="true"></span></td>
+		<td><a href="#!/books/rating/{{review.rating}}">[{{review.count}} books]</a></td>
+	</tr>
+	</tbody>
+</table>
+	<h1 class="ui header" align="center">TOP {{r.count}} books</h1>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th class="single line">#</th>
+			<th>Name</th>
+			<th>Authors</th>
+			<th>Average rating</th>
+		</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="book in r.books">
+			<td>
+				{{$index + 1}}
+			</td>
+			<td>
+				<a href="#!/books_show/{{book.id}}">{{book.name}}</a>
+			</td>
+			<td>
+				<div ng-repeat="author in book.authors">
+					{{author.firstName}} {{author.secondName}}
+				</div>
+			</td>
+			<td>
+				<span uib-rating ng-model="book.averageRatingRound" max="5" read-only="true" uib-tooltip="{{book.averageRating}}"></span>
+			</td>
+			</tr>
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+
+	<h1 class="ui header" align="center">TOP {{r.count}} authors</h1>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th class="single line">#</th>
+			<th>Second name</th>
+			<th>First name</th>
+			<th>Average rating</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="author in r.authors">
+			<td>
+				{{$index + 1}}
+			</td>
+			<td>
+				{{author.secondName}}
+			</td>
+			<td>
+				{{author.firstName}}
+			</td>
+			<td>
+				<span uib-rating ng-model="author.averageRatingRound" max="5" read-only="true" uib-tooltip="{{author.averageRating}}"></span>
+			</td>
+		</tr>
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+</div>

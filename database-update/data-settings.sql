@@ -1,0 +1,1 @@
+CREATE DATABASE library WITH encoding='UTF8';
